@@ -4,22 +4,15 @@ import { faker } from '@faker-js/faker'
 faker.seed(12345)
 
 export const tasks = Array.from({ length: 100 }, () => {
-  const statuses = [
-    'todo',
-    'in progress',
-    'done',
-    'canceled',
-    'backlog',
-  ] as const
+  const statuses = ['active', 'revoked'] as const
   const labels = ['bug', 'feature', 'documentation'] as const
-  const priorities = ['low', 'medium', 'high'] as const
 
   return {
-    id: `TASK-${faker.number.int({ min: 1000, max: 9999 })}`,
-    title: faker.lorem.sentence({ min: 5, max: 15 }),
+    id: faker.number.int({ min: 1, max: 100 }).toString(),
+    name: `Fake-${faker.number.int({ min: 1, max: 100 })}`,
     status: faker.helpers.arrayElement(statuses),
+    key: `api_key_${faker.string.uuid()}`,
     label: faker.helpers.arrayElement(labels),
-    priority: faker.helpers.arrayElement(priorities),
     createdAt: faker.date.past(),
     updatedAt: faker.date.recent(),
     assignee: faker.person.fullName(),
